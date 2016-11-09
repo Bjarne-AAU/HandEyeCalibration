@@ -1,0 +1,12 @@
+#goal definition
+string calibrator_type
+string detector_type
+string estimator_type
+string solver_type
+string camera
+---
+#result definition
+geometry_msgs/PoseStamped pose
+---
+#feedback
+geometry_msgs/PoseStamped pose

@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+
+from ros.calibration_master_node import CalibrationMasterNode
+
+if __name__ == '__main__':
+    node = CalibrationMasterNode("calibration_server")
+    node.run()

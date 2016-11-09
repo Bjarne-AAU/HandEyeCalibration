@@ -1,0 +1,33 @@
+<launch>
+
+  	<env name="ROSCONSOLE_CONFIG_FILE" value="$(find hand_eye_calibration)/rosconsole.conf"/>
+
+	<arg name="ArucoDetectorID" default="false" />
+	<arg name="ArucoDetectorSize" default="0.1" />
+	<arg name="ChessboardDetectorWidth" default="8" />
+	<arg name="ChessboardDetectorHeight" default="6" />
+	<arg name="ChessboardDetectorSize" default="0.038" />
+
+	<arg name="ArmMotionGroup" default="arm" />
+	<arg name="ArmMotionPlanner" default="PRMkConfigDefault" />
+
+	<node pkg="hand_eye_calibration" type="pose_estimator_node" name="pose_estimator_node" respawn="false" respawn_delay="5" output="screen" >
+		<param name="ArucoDetector/id" value="$(arg ArucoDetectorID)" />
+		<param name="ArucoDetector/size" value="$(arg ArucoDetectorSize)" />
+		<param name="ChessboardDetector/width" value="$(arg ChessboardDetectorWidth)" />
+		<param name="ChessboardDetector/height" value="$(arg ChessboardDetectorHeight)" />
+		<param name="ChessboardDetector/size" value="$(arg ChessboardDetectorSize)" />
+	</node>
+
+	<node pkg="hand_eye_calibration" type="calibrator_node" name="calibrator_node" respawn="false" respawn_delay="5" output="screen" >
+	</node>
+
+	<node pkg="hand_eye_calibration" type="arm_motion_node" name="arm_motion_node" respawn="false" respawn_delay="5" output="screen" >
+		<param name="group" value="$(arg ArmMotionGroup)" />
+		<param name="planner" value="$(arg ArmMotionPlanner)" />
+	</node>
+
+	<node pkg="hand_eye_calibration" type="calibration_server" name="calibration_server" respawn="false" respawn_delay="5" output="screen" >
+	</node>
+
+</launch>
